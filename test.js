@@ -1,13 +1,15 @@
+const protocal = require("./protocal")
+const ejs = require('ejs')
+const fs = require("fs")
 
-const x = "1"
-switch (x) {
-    case "1": {
-        const data = "ra"
-        break
-    }
-        
-    case "2": {
-        const data = "ww"
-    }
-        
-}
+ejs.renderFile("./genFunc.ejs", { protocal }, null, (err, str) => {
+    const reg = /\n[\s]*\n/g
+    str = str.replace(reg, "\n")
+    fs.writeFileSync("./handles.js", str)
+})
+
+// for(const [key ,value] of Object.entries(protocal)) {
+//     console.log(key , value)
+// }
+
+

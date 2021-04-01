@@ -1,0 +1,35 @@
+<% for(const [funcName, params] of Object.entries(protocal)){ %>
+function Req<%- funcName %>Params (<% for(const param of Object.keys(params.req)) { %><%- param %>, <% } %>) {
+    return {
+        isReq: true,
+        method: "<%- funcName %>",
+        param_: {
+        <% for(const param of Object.keys(params.req)) { %> 
+            <%- param %>,
+        <% } %> 
+        }
+    }
+}
+
+function Rsp<%- funcName %>Params (<% for(const param of Object.keys(params.req)) { %><%- param %>, <% } %>) {
+    return {
+        <% for(const param of Object.keys(params.req)) { %> 
+            <%- param %>,
+        <% } %> 
+    }
+}
+
+function req<%- funcName %> (<% for(const param of Object.keys(params.req)) { %><%- param %>, <% } %>) {
+    // 您的业务代码
+
+    return // 您返回的结果
+}
+<%  }%> 
+
+module.exports = {
+    <% for(const funcName of Object.keys(protocal)){ %>
+        Req<%- funcName %>Params,
+        Rsp<%- funcName %>Params,
+        req<%- funcName %>,
+    <% } %> 
+}
